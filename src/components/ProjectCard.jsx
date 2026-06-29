@@ -2,8 +2,26 @@ import { ArrowUpRight, CalendarDays } from 'lucide-react';
 import { SkillBadge } from './SkillBadge.jsx';
 
 export function ProjectCard({ item, skillNames, t }) {
+  const goToDetail = () => {
+    window.location.hash = `#/projects/${item.id}`;
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      goToDetail();
+    }
+  };
+
   return (
-    <article className="project-card reveal">
+    <article
+      className="project-card reveal clickable"
+      onClick={goToDetail}
+      onKeyDown={handleKeyDown}
+      role="link"
+      tabIndex={0}
+      aria-label={item.title}
+    >
       <div className="project-card-top">
         <span className={`type-chip ${item.type}`}>{item.kind}</span>
         <span className="period">
@@ -20,15 +38,32 @@ export function ProjectCard({ item, skillNames, t }) {
         ))}
       </div>
       <div className="card-actions">
-        <a href={item.links.demo} target="_blank" rel="noreferrer">
-          {t.actions.demo}
-          <ArrowUpRight size={15} />
+
+    {item.links?.demo && (
+        <a
+            href={item.links.demo}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+        >
+            {t.actions.demo}
+            <ArrowUpRight size={15} />
         </a>
-        <a href={item.links.source} target="_blank" rel="noreferrer">
-          {t.actions.source}
-          <ArrowUpRight size={15} />
+    )}
+
+    {item.links?.source && (
+        <a
+            href={item.links.source}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+        >
+            {t.actions.source}
+            <ArrowUpRight size={15} />
         </a>
-      </div>
+    )}
+
+</div>
     </article>
   );
 }

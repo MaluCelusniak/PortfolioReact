@@ -6,6 +6,7 @@ import { Footer } from './components/Footer.jsx';
 import { Home } from './pages/Home.jsx';
 import { About } from './pages/About.jsx';
 import { Projects } from './pages/Projects.jsx';
+import { ProjectDetail } from './pages/ProjectDetail.jsx';
 import { Contact } from './pages/Contact.jsx';
 
 const pages = {
@@ -15,14 +16,24 @@ const pages = {
   contact: Contact,
 };
 
-function pageFromHash() {
-  const hash = window.location.hash.replace('#/', '') || 'home';
-  return pages[hash] ? hash : 'home';
+// Parses the current hash into a { page, params } shape.
+// Supports plain pages (#/about) and one level of sub-route (#/projects/:id).
+function routeFromHash() {
+  const raw = window.location.hash.replace('#/', '').replace(/\/$/, '');
+  if (!raw) return { page: 'home', params: {} };
+
+  const [base, ...rest] = raw.split('/');
+
+  if (base === 'projects' && rest.length > 0) {
+    return { page: 'projectDetail', params: { id: rest.join('/') } };
+  }
+
+  return pages[base] ? { page: base, params: {} } : { page: 'home', params: {} };
 }
 
 export default function App() {
   const [lang, setLang] = useState(() => localStorage.getItem('portfolio-lang') || 'fr');
-  const [page, setPage] = useState(pageFromHash);
+  const [route, setRoute] = useState(routeFromHash);
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -30,27 +41,42 @@ export default function App() {
   }, [lang]);
 
   useEffect(() => {
-    const handleHashChange = () => setPage(pageFromHash());
+    const handleHashChange = () => setRoute(routeFromHash());
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Scroll to top whenever the route changes (new page or new project detail).
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [route.page, route.params.id]);
+
   const t = content[lang];
-  const Page = pages[page];
   const pageProps = useMemo(() => ({ lang, t }), [lang, t]);
+
+  // activePage drives the nav highlight: project detail still highlights "projects".
+  const activeNavPage = route.page === 'projectDetail' ? 'projects' : route.page;
+
+  let pageElement;
+  if (route.page === 'projectDetail') {
+    pageElement = <ProjectDetail {...pageProps} projectId={route.params.id} />;
+  } else {
+    const Page = pages[route.page] ?? Home;
+    pageElement = <Page {...pageProps} />;
+  }
 
   return (
     <div className="app-shell">
       <div className="site-backdrop" aria-hidden="true" />
       <TopNav
-        activePage={page}
+        activePage={activeNavPage}
         lang={lang}
         navItems={navItems}
         onLanguageChange={setLang}
         t={t}
       />
       <main id="content" className="page-wrap">
-        <Page {...pageProps} />
+        {pageElement}
       </main>
       <a className="floating-contact" href="#/contact" aria-label={t.actions.contact}>
         <ArrowUpRight size={18} />
