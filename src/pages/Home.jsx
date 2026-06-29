@@ -26,7 +26,7 @@ export function Home({ t }) {
         <div className="hero-panel reveal delay-1" aria-label={t.profile.portraitAlt}>
           <div className="portrait-orbit">
             <div className="portrait-card">
-              <span className="portrait-initials">YN</span>
+              <span className="portrait-initials">MLC</span>
             </div>
           </div>
           <div className="profile-snapshot">

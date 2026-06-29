@@ -1404,10 +1404,6 @@ export const itemsEN = [
         text: 'This project helped me consolidate my DevOps skills through building adapted Docker images, and deepen my knowledge of Symfony and modern web interface design. Teamwork was essential throughout, requiring constant coordination between the back-office and mobile app developers.',
       },
     ],
-    links: {
-      demo: '#',
-      source: '#',
-    },
   },
 ];
 
@@ -1437,9 +1433,9 @@ export const content = {
       summary:
         'Bienvenue sur mon portfolio ! Étudiante en BUT Informatique à l’IUT2 de Grenoble, je termine actuellement une alternance en développement full-stack chez Atlanticlog, où j’interviens aussi bien sur du Java legacy que sur des projets Python construits de zéro. Je recherche aujourd’hui un poste de développeuse full-stack / web.',
       stats: [
-        { value: '3', label: 'missions clés en alternance' },
-        { value: '1380', label: 'documents migrés (projet WikiJs)' },
-        { value: '2', label: 'langages au quotidien (Java / Python)' },
+        { value: '3+', label: 'ans de projets web et logiciel' },
+        { value: '10+', label: 'projets et missions menés' },
+        { value: '2', label: 'entreprises, deux univers tech' },
       ],
     },
     about: {
@@ -1482,9 +1478,9 @@ export const content = {
     skills: skillsFR,
     items: itemsFR,
     socials: [
-      { label: 'LinkedIn', url: 'https://www.linkedin.com/' },
-      { label: 'GitHub', url: 'https://github.com/' },
-      { label: 'CV', url: '#' },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maria-luiza-celusniak-de-souza-59a838270/' },
+      { label: 'GitHub', url: 'https://github.com/MaluCelusniak' },
+      { label: 'CV', url: '/src/assets/Maria_Luiza_Celusniak_CV.pdf' },
     ],
   },
   en: {
@@ -1511,9 +1507,9 @@ export const content = {
       summary:
         'Welcome to my portfolio! I am a third-year Computer Science student at IUT2 Grenoble, currently finishing a work-study program in full-stack development at Atlanticlog, where I work on legacy Java systems as well as Python projects built from scratch. I am now looking for a full-stack / web developer position.',
       stats: [
-        { value: '3', label: 'key missions during my apprenticeship' },
-        { value: '1380', label: 'documents migrated (WikiJs project)' },
-        { value: '2', label: 'core languages day to day (Java / Python)' },
+        { value: '3+', label: 'ans de projets web et logiciel' },
+        { value: '10+', label: 'projets et missions menés' },
+        { value: '2', label: 'entreprises, deux univers tech' },
       ],
     },
     about: {
@@ -1557,8 +1553,8 @@ export const content = {
     items: itemsEN,
     socials: [
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maria-luiza-celusniak-de-souza-59a838270/' },
-      { label: 'GitHub', url: 'https://github.com/' },
-      { label: 'Resume', url: '#' },
+      { label: 'GitHub', url: 'https://github.com/MaluCelusniak' },
+      { label: 'Resume', url: '/src/assets/Maria_Luiza_Celusniak_CV.pdf' },
     ],
   },
 };
